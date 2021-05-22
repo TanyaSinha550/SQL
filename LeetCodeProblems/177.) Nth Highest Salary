@@ -1,0 +1,17 @@
+App1
+
+
+CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
+result NUMBER;
+BEGIN
+
+
+ select (select * from (select distinct salary from employee order by salary desc) where
+    rownum <=N
+    minus
+    select * from (select distinct salary from employee order by salary desc) where
+    rownum <= N-1)  into result from dual ;
+    
+    
+    RETURN result;
+END;
