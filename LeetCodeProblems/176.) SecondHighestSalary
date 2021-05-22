@@ -10,8 +10,15 @@ select  (select salary from
 tt where tt.rn=2)
 SecondHighestSalary from dual
 
+Approach 3
 
-Approach 3 ---------> Best Way
+select (select distinct salary  from
+(select salary,dense_rank() over (order by salary desc) dn from employee ) tt 
+where tt.dn=2) 
+SecondHighestSalary from dual
+
+
+Approach 4 ---------> Best Way
 
 select (select * from (select distinct salary from employee order by salary desc)
 where rownum<=2
