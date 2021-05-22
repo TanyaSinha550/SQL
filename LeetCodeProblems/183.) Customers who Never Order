@@ -1,0 +1,15 @@
+============= App 1 =====================
+
+select name Customers from customers
+where id not in (
+select  c.id  from customers c inner join orders o
+on c.id=o.customerid)
+
+
+
+
+================ App 2 =====================
+
+select c.name Customers from customers c left join orders o 
+on c.id=o.customerid
+where o.customerid is null
