@@ -1,4 +1,14 @@
+============ App1 ================
+
 select distinct t.num ConsecutiveNums from
 (select num,lag(num) over (order by id) lg,lead(num) over (order by id) ld
 from logs ) t
 where t.lg= t.num and t.ld=t.num
+
+
+
+================== App 2 ================
+
+select distinct l1.num ConsecutiveNums from logs l1,logs l2,logs l3
+where l1.id = l2.id -1 and
+l1.id=l3.id+1 and l1.num=l2.num and l1.num=l3.num
