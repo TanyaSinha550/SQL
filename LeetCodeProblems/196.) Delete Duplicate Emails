@@ -1,0 +1,10 @@
+=============App 1 ==================
+delete p1 from person p1,person p2 
+where p1.email=p2.email and p1.id> p2.id
+
+
+============= App 2 ===================
+
+delete from person where id  in 
+(select id from (select id,email,row_number() over (partition by email order by id ) rn from person)p
+where p.rn>1 )
