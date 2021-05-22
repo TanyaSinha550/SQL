@@ -1,0 +1,26 @@
+Approach 1
+
+select max(salary) SecondHighestSalary from employee
+where salary < (select max(salary) from employee)
+
+Approach 2 
+
+select  (select salary from 
+(select a.salary,row_number() over (order by a.salary desc) rn from (select distinct salary from employee)a)
+tt where tt.rn=2)
+SecondHighestSalary from dual
+
+
+Approach 3 ---------> Best Way
+
+select (select * from (select distinct salary from employee order by salary desc)
+where rownum<=2
+minus
+select * from (select distinct salary from employee order by salary desc)
+where rownum<=1 ) SecondHighestSalary  from dual
+
+
+============ Not working on leetcode =============
+
+select distinct salary from employees order by salary desc
+offset 1 row fetch first 1 row only
