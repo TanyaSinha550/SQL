@@ -1,0 +1,5 @@
+select d.name Department,e.name Employee,e.salary from
+(select name,salary,departmentid,dense_rank() over (partition by departmentid order by salary desc) dn from employee) e
+join department d
+on e.departmentid=d.id
+where e.dn<=3
