@@ -1,0 +1,2 @@
+select w2.id from weather w1,weather w2
+where to_date(w2.recordDate,'YYYY-MM-DD') - to_date(w1.recordDate,'YYYY-MM-DD') = 1 and w2.temperature > w1.temperature
