@@ -1,4 +1,4 @@
-App1
+=============== App1 =================
 
 
 CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
@@ -13,5 +13,19 @@ BEGIN
     rownum <= N-1)  into result from dual ;
     
     
+    RETURN result;
+END;
+
+
+=========  APP2 ====================
+
+CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
+result NUMBER;
+BEGIN
+ 
+ select distinct salary into result from
+ (select salary,dense_rank() over (order by salary desc) dn from employee ) tt
+ where tt.dn=N;
+ 
     RETURN result;
 END;
