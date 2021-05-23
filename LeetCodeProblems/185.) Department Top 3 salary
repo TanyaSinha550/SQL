@@ -3,3 +3,15 @@ select d.name Department,e.name Employee,e.salary from
 join department d
 on e.departmentid=d.id
 where e.dn<=3
+
+
+
+============== Correlated Sub Query ===========
+
+
+select d.name Department,tt.name Employee,tt.salary from (
+                 select * from employee a 
+                 where 3 > ( select count(distinct salary) from employee b 
+                 where a.departmentid=b.departmentid and b.salary > a.salary )
+            ) tt
+join department d on tt.departmentid=d.id 
