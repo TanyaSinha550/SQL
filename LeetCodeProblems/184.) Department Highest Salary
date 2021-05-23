@@ -1,4 +1,12 @@
+================= multi columns subquery =================
+
 select d.name Department,e.name Employee,e.salary from employee e  join department d 
 on e.departmentid=d.id
 where (e.departmentid,salary) in
 (select departmentid,max(salary) from employee group by departmentid)
+
+
+================= Correlated sub queries ========================
+
+select employee_id,first_name,last_name,salary,department_id from employees a
+where a.salary= (select max(salary) from employees b where a.department_id=b.department_id )
