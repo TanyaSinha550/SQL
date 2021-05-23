@@ -10,3 +10,5 @@ where (e.departmentid,salary) in
 
 select employee_id,first_name,last_name,salary,department_id from employees a
 where a.salary= (select max(salary) from employees b where a.department_id=b.department_id )
+
+
