@@ -29,3 +29,10 @@ BEGIN
  
     RETURN result;
 END;
+
+
+=============== App 3 Correlated subqueries =============
+
+select distinct salary from employees a
+where N-1 = ( select count(distinct b.salary) from employees b where a.salary < b.salary )
+
