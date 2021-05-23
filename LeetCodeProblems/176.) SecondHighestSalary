@@ -3,7 +3,7 @@ Approach 1
 select max(salary) SecondHighestSalary from employee
 where salary < (select max(salary) from employee)
 
-Approach 2 
+Approach 2    ----- need to do distinct because there can be duplicates before that salary
 
 select  (select salary from 
 (select a.salary,row_number() over (order by a.salary desc) rn from (select distinct salary from employee)a)
